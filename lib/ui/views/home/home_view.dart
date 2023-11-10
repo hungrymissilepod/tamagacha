@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_app_template/ui/common/app_colors.dart';
 import 'package:flutter_app_template/ui/common/ui_helpers.dart';
@@ -46,6 +47,21 @@ class HomeView extends StackedView<HomeViewModel> {
                       ),
                     ),
                   ],
+                ),
+                FortuneBar(
+                  selected: viewModel.controller.stream,
+                  items: [
+                    for (var i in viewModel.items) FortuneItem(child: Text(i.name)),
+                  ],
+                ),
+                verticalSpaceMedium,
+                MaterialButton(
+                  color: Colors.black,
+                  onPressed: viewModel.spinWheel,
+                  child: Text(
+                    'Spin',
+                    style: const TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),
