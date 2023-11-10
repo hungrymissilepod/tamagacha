@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_app_template/ui/common/app_colors.dart';
 import 'package:flutter_app_template/ui/common/ui_helpers.dart';
@@ -7,7 +9,7 @@ import 'home_viewmodel.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
   final int startingIndex;
-  const HomeView({Key? key, required this.startingIndex}) : super(key: key);
+  HomeView({Key? key, required this.startingIndex}) : super(key: key);
 
   @override
   Widget builder(
@@ -37,12 +39,13 @@ class HomeView extends StackedView<HomeViewModel> {
                     verticalSpaceMedium,
                     MaterialButton(
                       color: Colors.black,
-                      onPressed: viewModel.incrementCounter,
+                      onPressed: viewModel.scanQR,
                       child: Text(
                         viewModel.counterLabel,
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
+                    Text(viewModel.scanBarcode),
                   ],
                 ),
                 Row(

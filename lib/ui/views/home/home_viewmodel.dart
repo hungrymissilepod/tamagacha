@@ -1,7 +1,9 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_app_template/app/app.bottomsheets.dart';
 import 'package:flutter_app_template/app/app.dialogs.dart';
 import 'package:flutter_app_template/app/app.locator.dart';
 import 'package:flutter_app_template/ui/common/app_strings.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -20,6 +22,22 @@ class HomeViewModel extends BaseViewModel {
   void incrementCounter() {
     _counter++;
     rebuildUi();
+  }
+
+  String scanBarcode = 'Unknown';
+
+  Future<void> scanQR() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'Cancel', true, ScanMode.QR);
+      print(barcodeScanRes);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+
+    scanBarcode = barcodeScanRes;
+    notifyListeners();
   }
 
   void showDialog() {
