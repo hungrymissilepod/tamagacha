@@ -10,7 +10,6 @@ import 'package:stacked_services/stacked_services.dart';
 
 /*
 TODO:
-- display images and gifs in carousel
 - after spinning a wheel we save the pet to user storage
 - display user's pets in a list
 - display pedometer data on screen
@@ -27,13 +26,18 @@ class HomeViewModel extends BaseViewModel {
   final _bottomSheetService = locator<BottomSheetService>();
 
   String scannedCode = '';
+  String chosenOne = '';
 
   List<Item> items = <Item>[
-    Item('Harry', 0.8),
-    Item('Ron', 0.7),
-    Item('Hermonie', 0.4),
-    Item('Voldemort', 0.1),
-    Item('Dunbledore', 0.2),
+    Item('Swole Doge', 0.3, 'doge_swole'),
+    Item('Doge', 0.7, 'doge'),
+    Item('Jerry', 0.4, 'jerry'),
+    Item('Mike', 0.1, 'mike'),
+    Item('Pika', 0.4, 'pika'),
+    Item('Big Yoshi', 0.4, 'yoshi'),
+    Item('John Cena', 0.2, 'john_cena', isGif: true),
+    Item('Dog', 0.3, 'dog', isGif: true),
+    Item('Ricardo', 0.15, 'ricardo', isGif: true),
   ];
 
   StreamController<int> controller = StreamController<int>();
@@ -53,7 +57,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   spinWheel() {
-    String chosenOne = randomChoice(items.map((e) => e.name), items.map((e) => e.weight));
+    chosenOne = randomChoice(items.map((e) => e.name), items.map((e) => e.weight));
     print(chosenOne);
     int? index = items.indexWhere((element) => element.name == chosenOne);
     if (index != -1) {
@@ -63,8 +67,10 @@ class HomeViewModel extends BaseViewModel {
 }
 
 class Item {
-  Item(this.name, this.weight);
+  Item(this.name, this.weight, this.file, {this.isGif = false});
 
   String name;
   double weight;
+  String file;
+  bool isGif;
 }

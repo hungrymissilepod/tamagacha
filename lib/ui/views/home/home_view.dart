@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
+// import 'package:flutter_gif/flutter_gif.dart';
+import 'package:gif_view/gif_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_app_template/ui/common/app_colors.dart';
 import 'package:flutter_app_template/ui/common/ui_helpers.dart';
@@ -49,9 +51,18 @@ class HomeView extends StackedView<HomeViewModel> {
                   ],
                 ),
                 FortuneBar(
+                  animateFirst: false,
+                  onAnimationEnd: () {
+                    print("you got a: ${viewModel.chosenOne}!");
+                  },
+                  height: 140,
                   selected: viewModel.controller.stream,
                   items: [
-                    for (var i in viewModel.items) FortuneItem(child: Text(i.name)),
+                    for (var i in viewModel.items)
+                      FortuneItem(
+                          child: PetItem(
+                        item: i,
+                      )),
                   ],
                 ),
                 verticalSpaceMedium,
@@ -76,4 +87,31 @@ class HomeView extends StackedView<HomeViewModel> {
     BuildContext context,
   ) =>
       HomeViewModel();
+}
+
+class PetItem extends StatelessWidget {
+  PetItem({super.key, required this.item});
+
+  Item item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          item.isGif
+              ? Flexible(
+                  child: GifView.asset(
+                    "assets/pets/gifs/${item.file}.gif",
+                    frameRate: 60,
+                  ),
+                )
+              : Flexible(child: Image.asset('assets/pets/${item.file}.png')),
+          Text(item.name),
+        ],
+      ),
+    );
+  }
 }

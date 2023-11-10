@@ -13,7 +13,6 @@ class StartupViewModel extends BaseViewModel {
   final _logger = getLogger('StartupViewModel');
 
   Future runStartupLogic() async {
-    await _dioService.get('');
     // 2. Check if the user is logged in
     if (_authenticationService.userLoggedIn()) {
       _logger.i('User is logged in');
