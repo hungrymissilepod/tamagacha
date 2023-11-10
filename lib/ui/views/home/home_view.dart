@@ -9,7 +9,7 @@ import 'home_viewmodel.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
   final int startingIndex;
-  HomeView({Key? key, required this.startingIndex}) : super(key: key);
+  const HomeView({Key? key, required this.startingIndex}) : super(key: key);
 
   @override
   Widget builder(
@@ -30,7 +30,7 @@ class HomeView extends StackedView<HomeViewModel> {
                 Column(
                   children: [
                     const Text(
-                      'Hello, STACKED!',
+                      'Scan QR code',
                       style: TextStyle(
                         fontSize: 35,
                         fontWeight: FontWeight.w900,
@@ -41,38 +41,12 @@ class HomeView extends StackedView<HomeViewModel> {
                       color: Colors.black,
                       onPressed: viewModel.scanQR,
                       child: Text(
-                        viewModel.counterLabel,
+                        'Scan',
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
-                    Text(viewModel.scanBarcode),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    MaterialButton(
-                      color: kcDarkGreyColor,
-                      onPressed: viewModel.showDialog,
-                      child: const Text(
-                        'Show Dialog',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    MaterialButton(
-                      color: kcDarkGreyColor,
-                      onPressed: viewModel.showBottomSheet,
-                      child: const Text(
-                        'Show Bottom Sheet',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
               ],
             ),
           ),
@@ -85,5 +59,5 @@ class HomeView extends StackedView<HomeViewModel> {
   HomeViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      HomeViewModel(startingIndex);
+      HomeViewModel();
 }
