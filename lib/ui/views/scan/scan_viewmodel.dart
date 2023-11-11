@@ -69,7 +69,7 @@ class ScanViewModel extends BaseViewModel {
     if (index != -1) {
       controller.add(index);
     }
-    _userService.savePet(allPets[index]);
+    _userService.savePet(Pet.clone(allPets[index]));
   }
 
   // late Stream<StepCount> stepCountStream;

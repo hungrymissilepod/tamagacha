@@ -28,6 +28,12 @@ class Pet extends Equatable {
 
   @override
   List<Object?> get props => [name, weight, file, isGif, rarity, uuid];
+
+  factory Pet.clone(Pet original) {
+    Map<String, dynamic> map = original.toJson();
+    Pet clone = Pet.fromJson(map);
+    return clone;
+  }
 }
 
 enum PetRarity { common, uncommon, infrequent, rare, unique, legendary }

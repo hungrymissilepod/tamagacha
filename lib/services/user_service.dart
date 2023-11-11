@@ -47,7 +47,7 @@ class UserService {
   }
 
   Future<void> savePet(Pet pet) async {
-    pet.uuid = uuid.v4();
+    pet.uuid = uuid.v1();
     pets.pets.add(pet);
     await _hiveService.write(HiveKeys.pets, json.encode(pets.toJson()));
   }

@@ -3,8 +3,6 @@ import 'package:stacked/stacked.dart';
 
 /*
 TODO:
-- display pedometer data on screen
-- Fix bug with deleting a pet. It currently deletes all duplicate pets
 - Show dialog when user gets a new pet. Allow user to name pet and save it's given name
 - give user coins based on number of steps taken
 - user can give pet food to a pet
