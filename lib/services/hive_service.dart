@@ -5,8 +5,15 @@ import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' show join;
 
+const int spinCost = 1000;
+const int maxPets = 10;
+
 class HiveKeys {
   static const String pets = 'pets';
+  static const String credits = 'credits';
+
+  /// The number of lifetime steps that we are using as our base level
+  static const String baseLevelSteps = 'baseLevelSteps';
 }
 
 class HiveService {

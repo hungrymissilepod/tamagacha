@@ -4,7 +4,6 @@ import 'package:stacked/stacked.dart';
 /*
 TODO:
 - Show dialog when user gets a new pet. Allow user to name pet and save it's given name
-- give user coins based on number of steps taken
 - user can give pet food to a pet
 - pets can gain EXP and level up
 - users need to scan a QR code in order to get a pet (can skip this in DEV mode)

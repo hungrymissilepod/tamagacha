@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/models/pet.dart';
+import 'package:flutter_app_template/services/hive_service.dart';
 import 'package:flutter_app_template/ui/common/ui_helpers.dart';
 import 'package:flutter_app_template/ui/views/home/home_view.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
@@ -29,8 +31,16 @@ class ScanView extends StackedView<ScanViewModel> {
             verticalSpaceLarge,
             Column(
               children: [
+                Text('Credits: ${viewModel.credits}'),
+                Visibility(
+                  visible: kDebugMode,
+                  child: TextButton(
+                    child: Text('+${spinCost} credits'),
+                    onPressed: () => viewModel.addCreditsCheat(),
+                  ),
+                ),
                 Text('Steps: ${viewModel.steps}'),
-                // Text('Pedestrian event: ${viewModel.status}'),
+                Text('Lifetime Steps: ${viewModel.lifeTimeSteps}'),
                 const Text(
                   'Scan QR code',
                   style: TextStyle(
@@ -67,10 +77,15 @@ class ScanView extends StackedView<ScanViewModel> {
             ),
             verticalSpaceMedium,
             MaterialButton(
+              disabledColor: Colors.grey,
               color: Colors.black,
-              onPressed: viewModel.spinWheel,
+              onPressed: viewModel.canSpinWheel
+                  ? () {
+                      viewModel.spinWheel();
+                    }
+                  : null,
               child: Text(
-                'Spin',
+                'Spin -${spinCost} credits',
                 style: const TextStyle(color: Colors.white),
               ),
             ),
@@ -85,7 +100,4 @@ class ScanView extends StackedView<ScanViewModel> {
     BuildContext context,
   ) =>
       ScanViewModel();
-
-  // @override
-  // void onViewModelReady(ScanViewModel viewModel) => viewModel.initPlatformState();
 }

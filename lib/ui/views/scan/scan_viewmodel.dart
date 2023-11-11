@@ -1,45 +1,34 @@
 import 'dart:async';
 
 import 'package:dart_random_choice/dart_random_choice.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_template/app/app.locator.dart';
 import 'package:flutter_app_template/models/pet.dart';
+import 'package:flutter_app_template/services/health_service.dart';
+import 'package:flutter_app_template/services/hive_service.dart';
 import 'package:flutter_app_template/services/user_service.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:health/health.dart';
 import 'package:stacked/stacked.dart';
+import 'package:is_first_run/is_first_run.dart';
 
-class ScanViewModel extends BaseViewModel {
+class ScanViewModel extends ReactiveViewModel {
   final UserService _userService = locator<UserService>();
+  final HealthService _healthService = locator<HealthService>();
 
-  late HealthFactory health;
-  String steps = '?';
+  int get credits => _userService.credits;
+  int get steps => _healthService.steps;
+  int get lifeTimeSteps => _healthService.lifeTimeSteps;
 
-  ScanViewModel() {
-    health = HealthFactory(useHealthConnectIfAvailable: true);
+  bool get canSpinWheel => _userService.canSpinWheel();
 
-    requestSteps();
+  void addCreditsCheat() {
+    _userService.addCredits(spinCost);
+    rebuildUi();
   }
 
-  Future<void> requestSteps() async {
-    var types = [
-      HealthDataType.STEPS,
-    ];
-    // requesting access to the data types before reading them
-    bool requested = await health.requestAuthorization(types);
-
-    var now = DateTime.now();
-
-    // fetch health data from the last 24 hours
-    List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(now.subtract(Duration(days: 1)), now, types);
-
-    // get the number of steps for today
-    var midnight = DateTime(now.year, now.month, now.day);
-    int? _steps = await health.getTotalStepsInInterval(midnight, now);
-    steps = _steps.toString();
-    notifyListeners();
-  }
+  @override
+  List<ListenableServiceMixin> get listenableServices => [_userService];
 
   List<Pet> get allPets => _userService.allPets.pets ?? <Pet>[];
 
@@ -70,51 +59,7 @@ class ScanViewModel extends BaseViewModel {
       controller.add(index);
     }
     _userService.savePet(Pet.clone(allPets[index]));
+    _userService.removeCredits(spinCost);
+    rebuildUi();
   }
-
-  // late Stream<StepCount> stepCountStream;
-  // late Stream<PedestrianStatus> pedestrianStatusStream;
-
-  // String status = '?', steps = '?';
-
-  // /// Handle step count changed
-  // void onStepCount(StepCount event) {
-  //   steps = event.steps.toString();
-  //   // int steps = event.steps;
-
-  //   DateTime timeStamp = event.timeStamp;
-  //   notifyListeners();
-  // }
-
-  // /// Handle status changed
-  // void onPedestrianStatusChanged(PedestrianStatus event) {
-  //   // String status = event.status;
-  //   status = event.status;
-
-  //   DateTime timeStamp = event.timeStamp;
-  //   notifyListeners();
-  // }
-
-  // /// Handle the error
-  // void onPedestrianStatusError(error) {
-  //   status = 'Pedestrian Status not available';
-  //   notifyListeners();
-  // }
-
-  // /// Handle the error
-  // void onStepCountError(error) {
-  //   steps = 'Step Count not available';
-  //   notifyListeners();
-  // }
-
-  // Future<void> initPlatformState() async {
-  //   // Init streams
-  //   pedestrianStatusStream = Pedometer.pedestrianStatusStream;
-  //   stepCountStream = Pedometer.stepCountStream;
-
-  //   // Listen to streams and handle errors
-  //   stepCountStream.listen(onStepCount).onError(onStepCountError);
-
-  //   pedestrianStatusStream.listen(onPedestrianStatusChanged).onError(onPedestrianStatusError);
-  // }
 }

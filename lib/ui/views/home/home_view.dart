@@ -46,7 +46,8 @@ class HomeView extends StackedView<HomeViewModel> {
       ),
       body: SafeArea(
         child: PageView(
-          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
           controller: viewModel.pageController,
           onPageChanged: viewModel.onPageChanged,
           children: <Widget>[

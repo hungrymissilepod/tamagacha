@@ -12,6 +12,7 @@ import 'package:flutter_app_template/services/hive_service.dart';
 import 'package:flutter_app_template/services/user_service.dart';
 import 'package:flutter_app_template/ui/views/scan/scan_view.dart';
 import 'package:flutter_app_template/ui/views/saved_pets/saved_pets_view.dart';
+import 'package:flutter_app_template/services/health_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -32,6 +33,7 @@ import 'package:flutter_app_template/ui/views/saved_pets/saved_pets_view.dart';
     LazySingleton(classType: DioService),
     LazySingleton(classType: HiveService),
     LazySingleton(classType: UserService),
+    LazySingleton(classType: HealthService),
 // @stacked-service
   ],
   bottomsheets: [

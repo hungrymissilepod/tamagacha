@@ -13,6 +13,7 @@ import 'package:flutter_app_template/models/pets.dart' as _i4;
 import 'package:flutter_app_template/services/authentication_service.dart'
     as _i9;
 import 'package:flutter_app_template/services/dio_service.dart' as _i10;
+import 'package:flutter_app_template/services/health_service.dart' as _i14;
 import 'package:flutter_app_template/services/hive_service.dart' as _i11;
 import 'package:flutter_app_template/services/user_service.dart' as _i12;
 import 'package:mockito/mockito.dart' as _i1;
@@ -920,6 +921,44 @@ class MockUserService extends _i1.Mock implements _i12.UserService {
         returnValueForMissingStub: null,
       );
   @override
+  int get credits => (super.noSuchMethod(
+        Invocation.getter(#credits),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+  @override
+  set credits(int? _credits) => super.noSuchMethod(
+        Invocation.setter(
+          #credits,
+          _credits,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  int get listenersCount => (super.noSuchMethod(
+        Invocation.getter(#listenersCount),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+  @override
+  void addCredits(int? num) => super.noSuchMethod(
+        Invocation.method(
+          #addCredits,
+          [num],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i7.Future<void> calculateInitialSteps(int? lifeTimeSteps) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #calculateInitialSteps,
+          [lifeTimeSteps],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
   _i7.Future<void> load() => (super.noSuchMethod(
         Invocation.method(
           #load,
@@ -946,4 +985,42 @@ class MockUserService extends _i1.Mock implements _i12.UserService {
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+  @override
+  void listenToReactiveValues(List<dynamic>? reactiveValues) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #listenToReactiveValues,
+          [reactiveValues],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void addListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void removeListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
+
+/// A class which mocks [HealthService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockHealthService extends _i1.Mock implements _i14.HealthService {}

@@ -21,9 +21,11 @@ class SavedPetsView extends StackedView<SavedPetsViewModel> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0),
         child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
           child: Column(
-            children: viewModel.userPets.map((e) => SavedPetCard(pet: e)).toList(),
+            children:
+                viewModel.userPets.map((e) => SavedPetCard(pet: e)).toList(),
           ),
         ),
       ),
