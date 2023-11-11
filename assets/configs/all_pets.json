@@ -1,0 +1,64 @@
+{
+  "pets": [
+    {
+      "name": "Swole Doge",
+      "weight": 0.3,
+      "file": "doge_swole",
+      "isGif": false
+    },
+    {
+      "name": "Doge",
+      "weight": 0.7,
+      "file": "doge",
+      "isGif": false
+    },
+    {
+      "name": "Jerry",
+      "weight": 0.4,
+      "file": "jerry",
+      "isGif": false
+    },
+    {
+      "name": "Mike",
+      "weight": 0.1,
+      "file": "mike",
+      "isGif": false
+    },
+    {
+      "name": "Pika",
+      "weight": 0.4,
+      "file": "pika",
+      "isGif": false
+    },
+    {
+      "name": "Big Yoshi",
+      "weight": 0.4,
+      "file": "yoshi",
+      "isGif": false
+    },
+    {
+      "name": "John Cena",
+      "weight": 0.2,
+      "file": "john_cena",
+      "isGif": true
+    },
+    {
+      "name": "Dog",
+      "weight": 0.3,
+      "file": "dog",
+      "isGif": true
+    },
+    {
+      "name": "Ricardo",
+      "weight": 0.15,
+      "file": "ricardo",
+      "isGif": true
+    },
+    {
+      "name": "Dat Boi",
+      "weight": 0.08,
+      "file": "dat_boi",
+      "isGif": true
+    }
+  ]
+}

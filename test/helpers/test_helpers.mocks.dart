@@ -8,9 +8,12 @@ import 'dart:ui' as _i6;
 
 import 'package:dio/dio.dart' as _i2;
 import 'package:flutter/material.dart' as _i4;
+import 'package:flutter_app_template/models/pet.dart' as _i11;
 import 'package:flutter_app_template/services/authentication_service.dart'
     as _i7;
 import 'package:flutter_app_template/services/dio_service.dart' as _i8;
+import 'package:flutter_app_template/services/hive_service.dart' as _i9;
+import 'package:flutter_app_template/services/user_service.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i3;
 
@@ -782,4 +785,87 @@ class MockDioService extends _i1.Mock implements _i8.DioService {
           ),
         )),
       ) as _i5.Future<_i2.Response<dynamic>>);
+}
+
+/// A class which mocks [HiveService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockHiveService extends _i1.Mock implements _i9.HiveService {
+  @override
+  _i5.Future<void> init() => (super.noSuchMethod(
+        Invocation.method(
+          #init,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> write(
+    String? key,
+    dynamic value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #write,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<dynamic> read(
+    String? key, {
+    dynamic defaultValue,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #read,
+          [key],
+          {#defaultValue: defaultValue},
+        ),
+        returnValue: _i5.Future<dynamic>.value(),
+        returnValueForMissingStub: _i5.Future<dynamic>.value(),
+      ) as _i5.Future<dynamic>);
+  @override
+  _i5.Future<void> clear() => (super.noSuchMethod(
+        Invocation.method(
+          #clear,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+}
+
+/// A class which mocks [UserService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserService extends _i1.Mock implements _i10.UserService {
+  @override
+  List<_i11.Pet> get pets => (super.noSuchMethod(
+        Invocation.getter(#pets),
+        returnValue: <_i11.Pet>[],
+        returnValueForMissingStub: <_i11.Pet>[],
+      ) as List<_i11.Pet>);
+  @override
+  set pets(List<_i11.Pet>? _pets) => super.noSuchMethod(
+        Invocation.setter(
+          #pets,
+          _pets,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i5.Future<void> load() => (super.noSuchMethod(
+        Invocation.method(
+          #load,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }

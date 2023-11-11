@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app_template/models/pet.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 // import 'package:flutter_gif/flutter_gif.dart';
@@ -58,10 +59,10 @@ class HomeView extends StackedView<HomeViewModel> {
                   height: 140,
                   selected: viewModel.controller.stream,
                   items: [
-                    for (var i in viewModel.items)
+                    for (var i in viewModel.allPets)
                       FortuneItem(
                           child: PetItem(
-                        item: i,
+                        pet: i,
                       )),
                   ],
                 ),
@@ -90,9 +91,9 @@ class HomeView extends StackedView<HomeViewModel> {
 }
 
 class PetItem extends StatelessWidget {
-  PetItem({super.key, required this.item});
+  PetItem({super.key, required this.pet});
 
-  Item item;
+  Pet pet;
 
   @override
   Widget build(BuildContext context) {
@@ -101,15 +102,15 @@ class PetItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          item.isGif
+          pet.isGif
               ? Flexible(
                   child: GifView.asset(
-                    "assets/pets/gifs/${item.file}.gif",
+                    "assets/pets/gifs/${pet.file}.gif",
                     frameRate: 60,
                   ),
                 )
-              : Flexible(child: Image.asset('assets/pets/${item.file}.png')),
-          Text(item.name),
+              : Flexible(child: Image.asset('assets/pets/${pet.file}.png')),
+          Text(pet.name),
         ],
       ),
     );
