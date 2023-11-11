@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_app_template/app/app.locator.dart';
@@ -12,6 +13,7 @@ class UserService with ListenableServiceMixin {
   final HiveService _hiveService = locator<HiveService>();
 
   final Uuid uuid = const Uuid();
+  final Random _random = Random();
 
   Pets pets = Pets(pets: []);
 
@@ -59,7 +61,17 @@ class UserService with ListenableServiceMixin {
     // for (Pet p in allPets.pets) {
     //   print('available pet: ${p.name}');
     // }
-    credits = await _hiveService.read(HiveKeys.credits);
+    credits = await _loadCredits();
+  }
+
+  Future<int> _loadCredits() async {
+    final dynamic data = await _hiveService.read(HiveKeys.credits);
+    if (data != null) {
+      if (data is int) {
+        return data;
+      }
+    }
+    return 0;
   }
 
   Future<Pets> _loadPets() async {
@@ -78,9 +90,12 @@ class UserService with ListenableServiceMixin {
     return allPets;
   }
 
+  double randomRange(num start, num end) => _random.nextDouble() * (end - start) + start;
+
   Future<void> savePet(Pet pet) async {
     if (pets.pets.length >= maxPets) return;
     pet.uuid = uuid.v1();
+    pet.hunger = randomRange(0.2, 0.8);
     pets.pets.add(pet);
     await _hiveService.write(HiveKeys.pets, json.encode(pets.toJson()));
   }
@@ -95,4 +110,8 @@ class UserService with ListenableServiceMixin {
     if (pets.pets.length >= maxPets) return false;
     return true;
   }
+}
+
+extension DoubleRounding on double {
+  double toPrecision(int n) => double.parse(toStringAsFixed(n));
 }

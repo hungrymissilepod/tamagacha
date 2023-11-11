@@ -5,70 +5,90 @@
       "weight": 0.3,
       "file": "doge_swole",
       "isGif": false,
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "hunger_threshold": 0.2,
+      "hunger_decrement": 0.1
     },
     {
       "name": "Doge",
       "weight": 0.7,
       "file": "doge",
       "isGif": false,
-      "rarity": "common"
+      "rarity": "common",
+      "hunger_threshold": 0.3,
+      "hunger_decrement": 0.1
     },
     {
       "name": "Jerry",
       "weight": 0.4,
       "file": "jerry",
       "isGif": false,
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "hunger_threshold": 0.3,
+      "hunger_decrement": 0.2
     },
     {
       "name": "Mike",
       "weight": 0.1,
       "file": "mike",
       "isGif": false,
-      "rarity": "rare"
+      "rarity": "rare",
+      "hunger_threshold": 0.2,
+      "hunger_decrement": 0.1
     },
     {
       "name": "Pika",
       "weight": 0.4,
       "file": "pika",
       "isGif": false,
-      "rarity": "infrequent"
+      "rarity": "infrequent",
+      "hunger_threshold": 0.4,
+      "hunger_decrement": 0.15
     },
     {
       "name": "Big Yoshi",
       "weight": 0.4,
       "file": "yoshi",
       "isGif": false,
-      "rarity": "rare"
+      "rarity": "rare",
+      "hunger_threshold": 0.4,
+      "hunger_decrement": 0.2
     },
     {
       "name": "John Cena",
       "weight": 0.2,
       "file": "john_cena",
       "isGif": true,
-      "rarity": "unique"
+      "rarity": "unique",
+      "hunger_threshold": 0.5,
+      "hunger_decrement": 0.2
     },
     {
       "name": "Dog",
       "weight": 0.3,
       "file": "dog",
       "isGif": true,
-      "rarity": "rare"
+      "rarity": "rare",
+      "hunger_threshold": 0.3,
+      "hunger_decrement": 0.15
     },
     {
       "name": "Ricardo",
       "weight": 0.15,
       "file": "ricardo",
       "isGif": true,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "hunger_threshold": 0.6,
+      "hunger_decrement": 0.2
     },
     {
       "name": "Dat Boi",
       "weight": 0.08,
       "file": "dat_boi",
       "isGif": true,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "hunger_threshold": 0.5,
+      "hunger_decrement": 0.17
     }
   ]
 }

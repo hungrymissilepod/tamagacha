@@ -12,7 +12,10 @@ class Pet extends Equatable {
     required this.file,
     this.isGif = false,
     required this.rarity,
+    required this.hungerThreshold,
+    required this.hungerDecrement,
     this.uuid,
+    this.hunger,
   });
 
   final String name;
@@ -20,14 +23,21 @@ class Pet extends Equatable {
   final String file;
   final bool isGif;
   final String rarity;
+
+  @JsonKey(name: 'hunger_threshold')
+  final double hungerThreshold;
+
+  @JsonKey(name: 'hunger_decrement')
+  final double hungerDecrement;
   String? uuid;
+  double? hunger;
 
   factory Pet.fromJson(Map<String, dynamic> json) => _$PetFromJson(json);
 
   Map<String, dynamic> toJson() => _$PetToJson(this);
 
   @override
-  List<Object?> get props => [name, weight, file, isGif, rarity, uuid];
+  List<Object?> get props => [name, weight, file, isGif, rarity, uuid, hungerThreshold, hungerDecrement, hunger];
 
   factory Pet.clone(Pet original) {
     Map<String, dynamic> map = original.toJson();
