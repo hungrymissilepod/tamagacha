@@ -10,6 +10,8 @@ import 'package:flutter_app_template/services/authentication_service.dart';
 import 'package:flutter_app_template/services/dio_service.dart';
 import 'package:flutter_app_template/services/hive_service.dart';
 import 'package:flutter_app_template/services/user_service.dart';
+import 'package:flutter_app_template/ui/views/scan/scan_view.dart';
+import 'package:flutter_app_template/ui/views/saved_pets/saved_pets_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -18,6 +20,8 @@ import 'package:flutter_app_template/services/user_service.dart';
     MaterialRoute(page: StartupView),
     MaterialRoute(page: CounterView),
     MaterialRoute(page: LoginView),
+    MaterialRoute(page: ScanView),
+    MaterialRoute(page: SavedPetsView),
 // @stacked-route
   ],
   dependencies: [

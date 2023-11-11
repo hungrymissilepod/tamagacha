@@ -6,9 +6,9 @@ part 'pets.g.dart';
 
 @JsonSerializable()
 class Pets extends Equatable {
-  const Pets({required this.pets});
+  Pets({required this.pets});
 
-  final List<Pet> pets;
+  List<Pet> pets;
 
   factory Pets.fromJson(Map<String, dynamic> json) => _$PetsFromJson(json);
 

@@ -4,61 +4,71 @@
       "name": "Swole Doge",
       "weight": 0.3,
       "file": "doge_swole",
-      "isGif": false
+      "isGif": false,
+      "rarity": "uncommon"
     },
     {
       "name": "Doge",
       "weight": 0.7,
       "file": "doge",
-      "isGif": false
+      "isGif": false,
+      "rarity": "common"
     },
     {
       "name": "Jerry",
       "weight": 0.4,
       "file": "jerry",
-      "isGif": false
+      "isGif": false,
+      "rarity": "uncommon"
     },
     {
       "name": "Mike",
       "weight": 0.1,
       "file": "mike",
-      "isGif": false
+      "isGif": false,
+      "rarity": "rare"
     },
     {
       "name": "Pika",
       "weight": 0.4,
       "file": "pika",
-      "isGif": false
+      "isGif": false,
+      "rarity": "infrequent"
     },
     {
       "name": "Big Yoshi",
       "weight": 0.4,
       "file": "yoshi",
-      "isGif": false
+      "isGif": false,
+      "rarity": "rare"
     },
     {
       "name": "John Cena",
       "weight": 0.2,
       "file": "john_cena",
-      "isGif": true
+      "isGif": true,
+      "rarity": "unique"
     },
     {
       "name": "Dog",
       "weight": 0.3,
       "file": "dog",
-      "isGif": true
+      "isGif": true,
+      "rarity": "rare"
     },
     {
       "name": "Ricardo",
       "weight": 0.15,
       "file": "ricardo",
-      "isGif": true
+      "isGif": true,
+      "rarity": "legendary"
     },
     {
       "name": "Dat Boi",
       "weight": 0.08,
       "file": "dat_boi",
-      "isGif": true
+      "isGif": true,
+      "rarity": "legendary"
     }
   ]
 }
