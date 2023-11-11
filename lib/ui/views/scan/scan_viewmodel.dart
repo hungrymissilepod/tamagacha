@@ -7,13 +7,41 @@ import 'package:flutter_app_template/app/app.locator.dart';
 import 'package:flutter_app_template/models/pet.dart';
 import 'package:flutter_app_template/services/user_service.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:pedometer/pedometer.dart';
+import 'package:health/health.dart';
 import 'package:stacked/stacked.dart';
 
 class ScanViewModel extends BaseViewModel {
   final UserService _userService = locator<UserService>();
 
-  List<Pet> get allPets => _userService.allPets?.pets ?? <Pet>[];
+  late HealthFactory health;
+  String steps = '?';
+
+  ScanViewModel() {
+    health = HealthFactory(useHealthConnectIfAvailable: true);
+
+    requestSteps();
+  }
+
+  Future<void> requestSteps() async {
+    var types = [
+      HealthDataType.STEPS,
+    ];
+    // requesting access to the data types before reading them
+    bool requested = await health.requestAuthorization(types);
+
+    var now = DateTime.now();
+
+    // fetch health data from the last 24 hours
+    List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(now.subtract(Duration(days: 1)), now, types);
+
+    // get the number of steps for today
+    var midnight = DateTime(now.year, now.month, now.day);
+    int? _steps = await health.getTotalStepsInInterval(midnight, now);
+    steps = _steps.toString();
+    notifyListeners();
+  }
+
+  List<Pet> get allPets => _userService.allPets.pets ?? <Pet>[];
 
   String scannedCode = '';
   String chosenOne = '';
@@ -44,49 +72,49 @@ class ScanViewModel extends BaseViewModel {
     _userService.savePet(allPets[index]);
   }
 
-  late Stream<StepCount> stepCountStream;
-  late Stream<PedestrianStatus> pedestrianStatusStream;
+  // late Stream<StepCount> stepCountStream;
+  // late Stream<PedestrianStatus> pedestrianStatusStream;
 
-  String status = '?', steps = '?';
+  // String status = '?', steps = '?';
 
-  /// Handle step count changed
-  void onStepCount(StepCount event) {
-    steps = event.steps.toString();
-    // int steps = event.steps;
+  // /// Handle step count changed
+  // void onStepCount(StepCount event) {
+  //   steps = event.steps.toString();
+  //   // int steps = event.steps;
 
-    DateTime timeStamp = event.timeStamp;
-    notifyListeners();
-  }
+  //   DateTime timeStamp = event.timeStamp;
+  //   notifyListeners();
+  // }
 
-  /// Handle status changed
-  void onPedestrianStatusChanged(PedestrianStatus event) {
-    // String status = event.status;
-    status = event.status;
+  // /// Handle status changed
+  // void onPedestrianStatusChanged(PedestrianStatus event) {
+  //   // String status = event.status;
+  //   status = event.status;
 
-    DateTime timeStamp = event.timeStamp;
-    notifyListeners();
-  }
+  //   DateTime timeStamp = event.timeStamp;
+  //   notifyListeners();
+  // }
 
-  /// Handle the error
-  void onPedestrianStatusError(error) {
-    status = 'Pedestrian Status not available';
-    notifyListeners();
-  }
+  // /// Handle the error
+  // void onPedestrianStatusError(error) {
+  //   status = 'Pedestrian Status not available';
+  //   notifyListeners();
+  // }
 
-  /// Handle the error
-  void onStepCountError(error) {
-    steps = 'Step Count not available';
-    notifyListeners();
-  }
+  // /// Handle the error
+  // void onStepCountError(error) {
+  //   steps = 'Step Count not available';
+  //   notifyListeners();
+  // }
 
-  Future<void> initPlatformState() async {
-    // Init streams
-    pedestrianStatusStream = Pedometer.pedestrianStatusStream;
-    stepCountStream = Pedometer.stepCountStream;
+  // Future<void> initPlatformState() async {
+  //   // Init streams
+  //   pedestrianStatusStream = Pedometer.pedestrianStatusStream;
+  //   stepCountStream = Pedometer.stepCountStream;
 
-    // Listen to streams and handle errors
-    stepCountStream.listen(onStepCount).onError(onStepCountError);
+  //   // Listen to streams and handle errors
+  //   stepCountStream.listen(onStepCount).onError(onStepCountError);
 
-    pedestrianStatusStream.listen(onPedestrianStatusChanged).onError(onPedestrianStatusError);
-  }
+  //   pedestrianStatusStream.listen(onPedestrianStatusChanged).onError(onPedestrianStatusError);
+  // }
 }

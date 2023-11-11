@@ -11,6 +11,11 @@ TODO:
 - pets can gain EXP and level up
 - users need to scan a QR code in order to get a pet (can skip this in DEV mode)
 - add sound effects to; spinning the wheel, landing on an item, pet levels up, etc.
+
+IMPROVEMENTS:
+- Add refresh button to refetch user step data
+- Add debouncer to fetch user step data every 30 seconds
+- Add listener for when app is foregrounded, then fetch user step data
 */
 
 class HomeViewModel extends BaseViewModel {

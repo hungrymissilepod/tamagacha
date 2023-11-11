@@ -1,5 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
   <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+  <!-- Not sure if I need these heart rate permissions -->
+  <uses-permission android:name="android.permission.health.READ_HEART_RATE"/>
+  <uses-permission android:name="android.permission.health.WRITE_HEART_RATE"/>
+  <queries>
+    <package android:name="com.google.android.apps.healthdata" />
+        <intent>
+            <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+        </intent>
+  </queries>
     <application
         android:label="flutter_app_template"
         android:name="${applicationName}"
