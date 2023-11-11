@@ -30,6 +30,12 @@
 	<string>Main</string>
   <key>NSCameraUsageDescription</key>
   <string>Camera permission is required for QR and barcode scanning.</string>
+  <key>NSMotionUsageDescription</key>
+  <string>This application tracks your steps</string>
+  <key>UIBackgroundModes</key>
+  <array>
+      <string>processing</string>
+  </array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
