@@ -41,8 +41,18 @@ class Pet extends Equatable {
   Map<String, dynamic> toJson() => _$PetToJson(this);
 
   @override
-  List<Object?> get props =>
-      [name, weight, file, isGif, rarity, uuid, hungerThreshold, hungerDecrement, hunger, timeAddedMilliseconds];
+  List<Object?> get props => [
+        name,
+        weight,
+        file,
+        isGif,
+        rarity,
+        uuid,
+        hungerThreshold,
+        hungerDecrement,
+        hunger,
+        timeAddedMilliseconds
+      ];
 
   factory Pet.clone(Pet original) {
     Map<String, dynamic> map = original.toJson();
@@ -74,7 +84,8 @@ class Pet extends Equatable {
     double rarityFactor = _rarityMultiplier();
 
     /// Calculate number of days the pet has been kept
-    DateTime dayAdded = DateTime.fromMillisecondsSinceEpoch(timeAddedMilliseconds!);
+    DateTime dayAdded =
+        DateTime.fromMillisecondsSinceEpoch(timeAddedMilliseconds!);
     int daysKeptPet = DateTime.now().difference(dayAdded).inDays;
     if (daysKeptPet == 0) {
       daysKeptPet = 1;

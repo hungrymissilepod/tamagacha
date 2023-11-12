@@ -14,6 +14,7 @@ import 'package:flutter_app_template/ui/views/scan/scan_view.dart';
 import 'package:flutter_app_template/ui/views/saved_pets/saved_pets_view.dart';
 import 'package:flutter_app_template/services/health_service.dart';
 import 'package:flutter_app_template/services/user_pets_service.dart';
+import 'package:flutter_app_template/ui/views/settings/settings_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -24,6 +25,7 @@ import 'package:flutter_app_template/services/user_pets_service.dart';
     MaterialRoute(page: LoginView),
     MaterialRoute(page: ScanView),
     MaterialRoute(page: SavedPetsView),
+    MaterialRoute(page: SettingsView),
 // @stacked-route
   ],
   dependencies: [

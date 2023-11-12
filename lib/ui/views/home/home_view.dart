@@ -46,7 +46,8 @@ class HomeView extends StackedView<HomeViewModel> {
       ),
       body: SafeArea(
         child: PageView(
-          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
           controller: viewModel.pageController,
           onPageChanged: viewModel.onPageChanged,
           children: <Widget>[
@@ -111,21 +112,21 @@ class PetItem extends StatelessWidget {
   }
 }
 
-      // child: DecoratedBox(
-      //   decoration: BoxDecoration(
-      //     border: Border.symmetric(
-      //       horizontal: BorderSide(
-      //         color: style.borderColor,
-      //         width: style.borderWidth / 2,
-      //       ),
-      //       vertical: BorderSide(
-      //         color: style.borderColor,
-      //         width: style.borderWidth / 4,
-      //       ),
-      //     ),
-      //     color: style.color,
-      //   ),
-      //   child: Center(
-      //     child: DefaultTextStyle(
-      //       textAlign: style.textAlign,
-      //       style: style.textStyle,
+// child: DecoratedBox(
+//   decoration: BoxDecoration(
+//     border: Border.symmetric(
+//       horizontal: BorderSide(
+//         color: style.borderColor,
+//         width: style.borderWidth / 2,
+//       ),
+//       vertical: BorderSide(
+//         color: style.borderColor,
+//         width: style.borderWidth / 4,
+//       ),
+//     ),
+//     color: style.color,
+//   ),
+//   child: Center(
+//     child: DefaultTextStyle(
+//       textAlign: style.textAlign,
+//       style: style.textStyle,

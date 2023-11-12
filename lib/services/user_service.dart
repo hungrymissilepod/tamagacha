@@ -22,6 +22,7 @@ class UserService with ListenableServiceMixin {
   Future<void> addCredits(int num) async {
     credits += num;
     await _hiveService.write(HiveKeys.credits, credits);
+    notifyListeners();
   }
 
   Future<void> removeCredits(int num) async {

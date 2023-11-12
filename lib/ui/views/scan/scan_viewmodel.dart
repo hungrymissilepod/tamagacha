@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dart_random_choice/dart_random_choice.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_template/app/app.locator.dart';
+import 'package:flutter_app_template/app/app.router.dart';
 import 'package:flutter_app_template/models/pet.dart';
 import 'package:flutter_app_template/services/health_service.dart';
 import 'package:flutter_app_template/services/hive_service.dart';
@@ -13,11 +14,13 @@ import 'package:health/health.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:stacked/stacked.dart';
 import 'package:is_first_run/is_first_run.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class ScanViewModel extends ReactiveViewModel {
   final UserService _userService = locator<UserService>();
   final UserPetsService _userPetsService = locator<UserPetsService>();
   final HealthService _healthService = locator<HealthService>();
+  final NavigationService _navigationService = locator<NavigationService>();
 
   final AudioPlayer player = AudioPlayer();
 
@@ -75,5 +78,9 @@ class ScanViewModel extends ReactiveViewModel {
 
   List<Pet> getRandomPets() {
     return (allPets.toList()..shuffle()).take(10).toList();
+  }
+
+  void onSettingsTapped() {
+    _navigationService.navigateToSettingsView();
   }
 }

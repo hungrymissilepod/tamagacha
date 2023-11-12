@@ -21,7 +21,8 @@ class HealthService {
 
   Future<void> fetchStepData() async {
     var now = DateTime.now();
-    lifeTimeSteps = await health.getTotalStepsInInterval(DateTime(2020, 1, 1), now) ?? 0;
+    lifeTimeSteps =
+        await health.getTotalStepsInInterval(DateTime(2020, 1, 1), now) ?? 0;
 
     // get the number of steps for today
     var midnight = DateTime(now.year, now.month, now.day);

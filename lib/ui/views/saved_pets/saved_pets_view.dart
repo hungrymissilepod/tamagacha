@@ -26,9 +26,11 @@ class SavedPetsView extends StackedView<SavedPetsViewModel> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0),
         child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
           child: Column(
-            children: viewModel.userPets.map((e) => SavedPetCard(pet: e)).toList(),
+            children:
+                viewModel.userPets.map((e) => SavedPetCard(pet: e)).toList(),
           ),
         ),
       ),
@@ -104,10 +106,13 @@ class SavedPetCard extends ViewModelWidget<SavedPetsViewModel> {
                   children: [
                     FeedButton(
                       onPressed: () => viewModel.feedPet(pet),
-                      canFeed: viewModel.canFeed && pet.hunger! < 1.0 && pet.hunger! != 0.0,
+                      canFeed: viewModel.canFeed &&
+                          pet.hunger! < 1.0 &&
+                          pet.hunger! != 0.0,
                     ),
                     SellButton(
-                      onPressed: () => viewModel.deletePet(pet, pet.sellValue()),
+                      onPressed: () =>
+                          viewModel.deletePet(pet, pet.sellValue()),
                       sellValue: pet.sellValue(),
                     ),
                   ],
@@ -159,7 +164,8 @@ class FeedButton extends StatelessWidget {
 }
 
 class SellButton extends StatelessWidget {
-  const SellButton({super.key, required this.onPressed, required this.sellValue});
+  const SellButton(
+      {super.key, required this.onPressed, required this.sellValue});
 
   final Function()? onPressed;
   final int sellValue;
