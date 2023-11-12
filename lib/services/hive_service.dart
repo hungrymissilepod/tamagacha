@@ -8,6 +8,9 @@ import 'package:path/path.dart' show join;
 const int spinCost = 1000;
 const int maxPets = 10;
 const double foodAmount = 0.2; // amount food replenishes hunger
+const int healthCheckIntervalMinutes = 60;
+
+/// how many minutes between health checks
 
 class HiveKeys {
   static const String pets = 'pets';
@@ -15,6 +18,9 @@ class HiveKeys {
 
   /// The number of lifetime steps that we are using as our base level
   static const String baseLevelSteps = 'baseLevelSteps';
+
+  /// The last time (datetime) that we checked user's pets health
+  static const String petHealthLastCheckTime = 'petHealthLastCheckTime';
 }
 
 class HiveService {

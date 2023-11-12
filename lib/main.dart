@@ -5,6 +5,10 @@ import 'package:flutter_app_template/app/app.bottomsheets.dart';
 import 'package:flutter_app_template/app/app.dialogs.dart';
 import 'package:flutter_app_template/app/app.locator.dart';
 import 'package:flutter_app_template/app/app.router.dart';
+import 'package:flutter_app_template/services/health_service.dart';
+import 'package:flutter_app_template/services/user_pets_service.dart';
+import 'package:flutter_app_template/services/user_service.dart';
+import 'package:flutter_fgbg/flutter_fgbg.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -12,8 +16,6 @@ import 'package:permission_handler/permission_handler.dart';
 TODO:
 
 - display pet rarity in saved pets view cards
-- pets hunger needs to decrease over a specified time (30 minutes?)
-- need to keep track of last time pets hunger was checked. check again each 30 minutes and each time app is opened and foregrounded. just like how we check the steps
 - if a pet's hunger reaches 0 they die. Show a dialog to user telling them that their pet died and remove their pet
 - Show dialog when user gets a new pet. Allow user to name pet and save it's given name
 - pets can gain EXP and level up?
@@ -23,8 +25,8 @@ TODO:
 
 IMPROVEMENTS:
 - Add refresh button to refetch user step data
-- Add debouncer to fetch user step data every 30 seconds
-- Add listener for when app is foregrounded, then fetch user step data
+- Add debouncer to fetch user step data every 30 seconds?
+- Add debouncer to check pet health every 60 minutes
 */
 
 Future<void> main() async {
@@ -32,6 +34,7 @@ Future<void> main() async {
   await setupLocator();
   setupDialogUi();
   setupBottomSheetUi();
+
   if (Platform.isAndroid) {
     await Permission.activityRecognition.request();
     await Permission.location.request();
@@ -39,18 +42,46 @@ Future<void> main() async {
   runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
 
   @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
+  final UserPetsService userPetsService = locator<UserPetsService>();
+  final HealthService healthService = locator<HealthService>();
+  final UserService userService = locator<UserService>();
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {}
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: Routes.startupView,
-      onGenerateRoute: StackedRouter().onGenerateRoute,
-      navigatorKey: StackedService.navigatorKey,
-      navigatorObservers: [
-        StackedService.routeObserver,
-      ],
+    return FGBGNotifier(
+      onEvent: (FGBGType value) async {
+        if (value == FGBGType.foreground) {
+          print(value.toString());
+          await healthService.fetchStepData();
+          await userService.updateBaseLevelSteps(healthService.lifeTimeSteps);
+          await userPetsService.checkPetHealth();
+        }
+      },
+      child: MaterialApp(
+        initialRoute: Routes.startupView,
+        onGenerateRoute: StackedRouter().onGenerateRoute,
+        navigatorKey: StackedService.navigatorKey,
+        navigatorObservers: [
+          StackedService.routeObserver,
+        ],
+      ),
     );
   }
 }

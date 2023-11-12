@@ -5,9 +5,10 @@ import 'package:flutter_app_template/app/app.locator.dart';
 import 'package:flutter_app_template/models/pet.dart';
 import 'package:flutter_app_template/models/pets.dart';
 import 'package:flutter_app_template/services/hive_service.dart';
+import 'package:stacked/stacked.dart';
 import 'package:uuid/uuid.dart';
 
-class UserPetsService {
+class UserPetsService with ListenableServiceMixin {
   final HiveService _hiveService = locator<HiveService>();
 
   final Uuid uuid = const Uuid();
@@ -40,13 +41,47 @@ class UserPetsService {
   }
 
   Future<void> feedPet(String petId) async {
+    updatePetHunger(petId, foodAmount);
+    await _hiveService.write(HiveKeys.pets, json.encode(pets.toJson()));
+  }
+
+  Future<void> checkPetHealth() async {
+    /// Get the last time we checked our pets health
+    final dynamic data = await _hiveService.read(HiveKeys.petHealthLastCheckTime);
+    if (data == null) {
+      _hiveService.write(HiveKeys.petHealthLastCheckTime, DateTime.now().millisecondsSinceEpoch);
+      return;
+    }
+
+    int lastCheckMilliseconds = data as int;
+    // this is the last time we did a health check
+    DateTime lastCheckDateTime = DateTime.fromMillisecondsSinceEpoch(lastCheckMilliseconds);
+
+    DateTime now = DateTime.now();
+    // now = now.subtract(Duration(minutes: 61));
+
+    int diffMinutes = now.difference(lastCheckDateTime).inMinutes;
+
+    int numHealthChecksOverdue = (diffMinutes ~/ healthCheckIntervalMinutes).abs();
+    print('numHealthChecksOverdue: $numHealthChecksOverdue');
+
+    for (Pet pet in pets.pets) {
+      updatePetHunger(pet.uuid!, -(pet.hungerDecrement * numHealthChecksOverdue));
+    }
+
+    await _hiveService.write(HiveKeys.pets, json.encode(pets.toJson()));
+    await _hiveService.write(HiveKeys.petHealthLastCheckTime, DateTime.now().millisecondsSinceEpoch);
+    await loadPets();
+    notifyListeners();
+  }
+
+  Future<void> updatePetHunger(String petId, double value) async {
     int index = pets.pets.indexWhere((element) => element.uuid == petId);
     if (index != -1) {
       double? currentHunger = pets.pets[index].hunger;
-      currentHunger = currentHunger! + foodAmount;
+      currentHunger = currentHunger! + value;
       pets.pets[index].hunger = currentHunger.clamp(0.0, 1.0);
     }
-    await _hiveService.write(HiveKeys.pets, json.encode(pets.toJson()));
   }
 }
 

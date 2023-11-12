@@ -33,6 +33,7 @@ dependencies:
   permission_handler: ^11.0.1
   is_first_run: ^1.0.0
   percent_indicator: ^4.2.3
+  flutter_fgbg: ^0.3.0
 
 
 dev_dependencies:

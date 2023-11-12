@@ -10,10 +10,18 @@ class HealthService {
   }
 
   Future<void> init() async {
-    var now = DateTime.now();
+    var types = [
+      HealthDataType.STEPS,
+    ];
 
-    lifeTimeSteps =
-        await health.getTotalStepsInInterval(DateTime(2020, 1, 1), now) ?? 0;
+    // requesting access to the data types before reading them
+    await health.requestAuthorization(types);
+    await fetchStepData();
+  }
+
+  Future<void> fetchStepData() async {
+    var now = DateTime.now();
+    lifeTimeSteps = await health.getTotalStepsInInterval(DateTime(2020, 1, 1), now) ?? 0;
 
     // get the number of steps for today
     var midnight = DateTime(now.year, now.month, now.day);

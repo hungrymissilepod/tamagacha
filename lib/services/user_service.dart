@@ -19,18 +19,18 @@ class UserService with ListenableServiceMixin {
 
   int credits = 0;
 
-  void addCredits(int num) {
+  Future<void> addCredits(int num) async {
     credits += num;
-    _hiveService.write(HiveKeys.credits, credits);
+    await _hiveService.write(HiveKeys.credits, credits);
   }
 
-  void removeCredits(int num) {
+  Future<void> removeCredits(int num) async {
     credits -= num;
-    _hiveService.write(HiveKeys.credits, credits);
+    await _hiveService.write(HiveKeys.credits, credits);
   }
 
   Future<void> calculateInitialSteps(int lifeTimeSteps) async {
-    _hiveService.write(HiveKeys.baseLevelSteps, lifeTimeSteps);
+    await _hiveService.write(HiveKeys.baseLevelSteps, lifeTimeSteps);
   }
 
   Future<void> updateBaseLevelSteps(int currentStepsLifeTimeSteps) async {
@@ -41,7 +41,7 @@ class UserService with ListenableServiceMixin {
       final int diff = currentStepsLifeTimeSteps - currentBaseLevelSteps;
       print('diff: $diff');
 
-      addCredits(diff);
+      await addCredits(diff);
 
       await _hiveService.write(HiveKeys.baseLevelSteps, currentBaseLevelSteps + diff);
     }
