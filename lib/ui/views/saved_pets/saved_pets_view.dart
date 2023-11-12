@@ -3,6 +3,8 @@ import 'package:flutter_app_template/models/pet.dart';
 import 'package:gif_view/gif_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_app_template/services/user_service.dart';
+import 'package:flutter_app_template/services/user_pets_service.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 import 'saved_pets_viewmodel.dart';
 
@@ -43,8 +45,20 @@ class SavedPetCard extends ViewModelWidget<SavedPetsViewModel> {
 
   final Pet pet;
 
+  Color hungerBarColor(double hunger) {
+    if (hunger <= 0.2) {
+      return Colors.red;
+    }
+    if (hunger <= 0.5) {
+      return Colors.orange;
+    }
+    return Colors.green;
+  }
+
   @override
   Widget build(BuildContext context, SavedPetsViewModel viewModel) {
+    double hunger = pet.hunger?.toPrecision(2) ?? 0.0;
+    int hungerPercentage = (hunger * 100).toInt();
     return Card(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,7 +70,6 @@ class SavedPetCard extends ViewModelWidget<SavedPetsViewModel> {
                     "assets/pets/gifs/${pet.file}.gif",
                     height: 100,
                     width: 100,
-                    frameRate: 60,
                   ),
                 )
               : Flexible(
@@ -77,29 +90,38 @@ class SavedPetCard extends ViewModelWidget<SavedPetsViewModel> {
                 Text(
                   'Rarity: ${pet.rarity}',
                 ),
-                Text('Hunger: ${pet.hunger?.toPrecision(2)}'),
-                LinearProgressIndicator(
-                  value: pet.hunger?.toPrecision(2) ?? 0.0,
+                Text('Hunger: ${hungerPercentage}%'),
+                LinearPercentIndicator(
+                  percent: hunger.clamp(0.0, 1.0),
+                  progressColor: hungerBarColor(hunger),
+                  backgroundColor: Colors.grey[200],
+                  lineHeight: 10,
+                  barRadius: Radius.circular(10),
+                  padding: EdgeInsets.zero,
                 ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Feed',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue,
+                Row(
+                  children: [
+                    TextButton(
+                      onPressed: () => viewModel.feedPet(pet),
+                      child: Text(
+                        'Feed',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () => viewModel.deletePet(pet),
-                  child: Text(
-                    'Put down',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
+                    TextButton(
+                      onPressed: () => viewModel.deletePet(pet),
+                      child: Text(
+                        'Put down',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),

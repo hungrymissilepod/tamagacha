@@ -15,6 +15,7 @@ import '../services/authentication_service.dart';
 import '../services/dio_service.dart';
 import '../services/health_service.dart';
 import '../services/hive_service.dart';
+import '../services/user_pets_service.dart';
 import '../services/user_service.dart';
 
 final locator = StackedLocator.instance;
@@ -36,4 +37,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => HiveService());
   locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => HealthService());
+  locator.registerLazySingleton(() => UserPetsService());
 }

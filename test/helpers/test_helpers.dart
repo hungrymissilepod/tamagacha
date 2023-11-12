@@ -7,6 +7,7 @@ import 'package:flutter_app_template/services/dio_service.dart';
 import 'package:flutter_app_template/services/hive_service.dart';
 import 'package:flutter_app_template/services/user_service.dart';
 import 'package:flutter_app_template/services/health_service.dart';
+import 'package:flutter_app_template/services/user_pets_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -20,6 +21,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<HiveService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<UserService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<HealthService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<UserPetsService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -31,6 +33,7 @@ void registerServices() {
   getAndRegisterHiveService();
   getAndRegisterUserService();
   getAndRegisterHealthService();
+  getAndRegisterUserPetsService();
 // @stacked-mock-register
 }
 
@@ -116,6 +119,13 @@ MockHealthService getAndRegisterHealthService() {
   _removeRegistrationIfExists<HealthService>();
   final service = MockHealthService();
   locator.registerSingleton<HealthService>(service);
+  return service;
+}
+
+MockUserPetsService getAndRegisterUserPetsService() {
+  _removeRegistrationIfExists<UserPetsService>();
+  final service = MockUserPetsService();
+  locator.registerSingleton<UserPetsService>(service);
   return service;
 }
 // @stacked-mock-create

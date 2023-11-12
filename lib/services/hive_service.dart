@@ -7,6 +7,7 @@ import 'package:path/path.dart' show join;
 
 const int spinCost = 1000;
 const int maxPets = 10;
+const double foodAmount = 0.2; // amount food replenishes hunger
 
 class HiveKeys {
   static const String pets = 'pets';

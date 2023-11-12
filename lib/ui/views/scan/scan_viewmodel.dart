@@ -6,6 +6,7 @@ import 'package:flutter_app_template/app/app.locator.dart';
 import 'package:flutter_app_template/models/pet.dart';
 import 'package:flutter_app_template/services/health_service.dart';
 import 'package:flutter_app_template/services/hive_service.dart';
+import 'package:flutter_app_template/services/user_pets_service.dart';
 import 'package:flutter_app_template/services/user_service.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:health/health.dart';
@@ -14,6 +15,7 @@ import 'package:is_first_run/is_first_run.dart';
 
 class ScanViewModel extends ReactiveViewModel {
   final UserService _userService = locator<UserService>();
+  final UserPetsService _userPetsService = locator<UserPetsService>();
   final HealthService _healthService = locator<HealthService>();
 
   int get credits => _userService.credits;
@@ -58,7 +60,7 @@ class ScanViewModel extends ReactiveViewModel {
     if (index != -1) {
       controller.add(index);
     }
-    _userService.savePet(Pet.clone(allPets[index]));
+    _userPetsService.savePet(Pet.clone(allPets[index]));
     _userService.removeCredits(spinCost);
     rebuildUi();
   }

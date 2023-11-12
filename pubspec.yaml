@@ -34,6 +34,7 @@ dependencies:
   is_first_run: ^1.0.0
   percent_indicator: ^4.2.3
 
+
 dev_dependencies:
   build_runner: ^2.4.5
   flutter_test:

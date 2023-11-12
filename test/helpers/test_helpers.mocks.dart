@@ -15,6 +15,7 @@ import 'package:flutter_app_template/services/authentication_service.dart'
 import 'package:flutter_app_template/services/dio_service.dart' as _i11;
 import 'package:flutter_app_template/services/health_service.dart' as _i15;
 import 'package:flutter_app_template/services/hive_service.dart' as _i12;
+import 'package:flutter_app_template/services/user_pets_service.dart' as _i16;
 import 'package:flutter_app_template/services/user_service.dart' as _i13;
 import 'package:health/health.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
@@ -997,6 +998,22 @@ class MockUserService extends _i1.Mock implements _i13.UserService {
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
   @override
+  double randomRange(
+    num? start,
+    num? end,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #randomRange,
+          [
+            start,
+            end,
+          ],
+        ),
+        returnValue: 0.0,
+        returnValueForMissingStub: 0.0,
+      ) as double);
+  @override
   _i8.Future<void> savePet(_i14.Pet? pet) => (super.noSuchMethod(
         Invocation.method(
           #savePet,
@@ -1120,3 +1137,8 @@ class MockHealthService extends _i1.Mock implements _i15.HealthService {
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
 }
+
+/// A class which mocks [UserPetsService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserPetsService extends _i1.Mock implements _i16.UserPetsService {}
