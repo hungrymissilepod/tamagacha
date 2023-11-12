@@ -5,6 +5,7 @@ import 'package:flutter_app_template/services/hive_service.dart';
 import 'package:flutter_app_template/ui/common/ui_helpers.dart';
 import 'package:flutter_app_template/ui/views/home/home_view.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:stacked/stacked.dart';
 
 import 'scan_viewmodel.dart';
@@ -60,7 +61,9 @@ class ScanView extends StackedView<ScanViewModel> {
               ],
             ),
             FortuneBar(
+              rotationCount: 20,
               animateFirst: false,
+              duration: Duration(milliseconds: 7800),
               onAnimationEnd: () {
                 print("you got a: ${viewModel.chosenOne}!");
               },

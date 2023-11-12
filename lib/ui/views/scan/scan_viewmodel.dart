@@ -10,6 +10,7 @@ import 'package:flutter_app_template/services/user_pets_service.dart';
 import 'package:flutter_app_template/services/user_service.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:health/health.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:stacked/stacked.dart';
 import 'package:is_first_run/is_first_run.dart';
 
@@ -18,14 +19,16 @@ class ScanViewModel extends ReactiveViewModel {
   final UserPetsService _userPetsService = locator<UserPetsService>();
   final HealthService _healthService = locator<HealthService>();
 
+  final AudioPlayer player = AudioPlayer();
+
   int get credits => _userService.credits;
   int get steps => _healthService.steps;
   int get lifeTimeSteps => _healthService.lifeTimeSteps;
 
   bool get canSpinWheel => _userService.canSpinWheel();
 
-  void addCreditsCheat() {
-    _userService.addCredits(spinCost);
+  Future<void> addCreditsCheat() async {
+    await _userService.addCredits(spinCost);
     rebuildUi();
   }
 
@@ -54,8 +57,10 @@ class ScanViewModel extends ReactiveViewModel {
   }
 
   spinWheel() {
+    player.setAsset('assets/audio/fortune.mp3');
+    player.play();
+
     chosenOne = randomChoice(allPets.map((e) => e.name), allPets.map((e) => e.weight));
-    print(chosenOne);
     int? index = allPets.indexWhere((element) => element.name == chosenOne);
     if (index != -1) {
       controller.add(index);

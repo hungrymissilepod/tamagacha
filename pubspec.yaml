@@ -34,6 +34,7 @@ dependencies:
   is_first_run: ^1.0.0
   percent_indicator: ^4.2.3
   flutter_fgbg: ^0.3.0
+  just_audio: ^0.9.35
 
 
 dev_dependencies:
@@ -52,6 +53,7 @@ flutter:
 
 
   assets:
+    - assets/audio/
     - assets/configs/
     - assets/pets/
     - assets/pets/gifs/

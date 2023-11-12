@@ -19,7 +19,16 @@ TODO:
 - if a pet's hunger reaches 0 they die. Show a dialog to user telling them that their pet died and remove their pet
 - Show dialog when user gets a new pet. Allow user to name pet and save it's given name
 - pets can gain EXP and level up?
-- users need to scan a QR code in order to get a pet (can skip this in DEV mode)
+- users need to scan a QR code in order to get a pet
+- clean up the scan view UI
+- add more pets and gifs
+- show a dialog when spinning the wheel that will display the wheel and then the pet the user gets afterwards
+- when we spin the wheel, randomise which pets will be in the pot (only have a few rare ones to make them more rare)
+- user should be able to sell their pet while it is still ALIVE
+  - remove the Put Down button
+  - if pet is dead then replace the sell button for a remove button
+  - the pet's worth is based on its rarity and it's health/hunger level
+- display to the user when they have a full inventory of pets
 - add sound effects to; spinning the wheel, landing on an item, pet levels up, etc.
 
 
