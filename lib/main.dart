@@ -15,7 +15,6 @@ import 'package:permission_handler/permission_handler.dart';
 /*
 TODO:
 - pets can gain EXP and level up?
-- users need to scan a QR code in order to get a pet
 - add more pets and gifs
 
 IMPROVEMENTS:

@@ -113,8 +113,13 @@ class ScanView extends StackedView<ScanViewModel> {
                 ),
                 SizedBox(height: 20),
                 MaterialButton(
+                  disabledColor: Colors.grey,
                   color: Colors.black,
-                  onPressed: viewModel.scanQR,
+                  onPressed: viewModel.canSpinWheel
+                      ? () {
+                          viewModel.scanQR();
+                        }
+                      : null,
                   child: Text(
                     'Scan',
                     style: const TextStyle(color: Colors.white),

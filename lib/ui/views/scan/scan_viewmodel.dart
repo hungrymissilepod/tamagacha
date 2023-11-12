@@ -56,10 +56,13 @@ class ScanViewModel extends ReactiveViewModel {
     }
 
     scannedCode = barcodeScanRes;
+    if (scannedCode == 'https://qr.codes/saZGPy') {
+      await spinWheel(isFreeSpin: true);
+    }
     notifyListeners();
   }
 
-  spinWheel() async {
+  spinWheel({bool isFreeSpin = false}) async {
     player.setAsset('assets/audio/fortune.mp3');
     player.play();
 
@@ -72,7 +75,9 @@ class ScanViewModel extends ReactiveViewModel {
       controller.add(index);
     }
     await _userPetsService.savePet(Pet.clone(allPets[index]));
-    await _userService.removeCredits(spinCost);
+    if (!isFreeSpin) {
+      await _userService.removeCredits(spinCost);
+    }
     rebuildUi();
   }
 
