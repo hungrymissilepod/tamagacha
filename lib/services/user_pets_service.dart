@@ -31,6 +31,7 @@ class UserPetsService with ListenableServiceMixin {
     if (pets.pets.length >= maxPets) return;
     pet.uuid = uuid.v1();
     pet.hunger = randomRange(0.2, 0.8);
+    pet.timeAddedMilliseconds = DateTime.now().millisecondsSinceEpoch;
     pets.pets.add(pet);
     await _hiveService.write(HiveKeys.pets, json.encode(pets.toJson()));
   }

@@ -16,6 +16,7 @@ Pet _$PetFromJson(Map<String, dynamic> json) => Pet(
       hungerDecrement: (json['hunger_decrement'] as num).toDouble(),
       uuid: json['uuid'] as String?,
       hunger: (json['hunger'] as num?)?.toDouble(),
+      timeAddedMilliseconds: json['timeAddedMilliseconds'] as int?,
     );
 
 Map<String, dynamic> _$PetToJson(Pet instance) => <String, dynamic>{
@@ -28,4 +29,5 @@ Map<String, dynamic> _$PetToJson(Pet instance) => <String, dynamic>{
       'hunger_decrement': instance.hungerDecrement,
       'uuid': instance.uuid,
       'hunger': instance.hunger,
+      'timeAddedMilliseconds': instance.timeAddedMilliseconds,
     };

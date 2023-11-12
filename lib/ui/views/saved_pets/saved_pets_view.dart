@@ -68,23 +68,7 @@ class SavedPetCard extends ViewModelWidget<SavedPetsViewModel> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(width: 10),
-          Flexible(
-            flex: 2,
-            child: Container(
-              color: rarityColor(pet.rarity).withOpacity(0.5),
-              child: pet.isGif
-                  ? GifView.asset(
-                      "assets/pets/gifs/${pet.file}.gif",
-                      height: 100,
-                      width: 100,
-                    )
-                  : Image.asset(
-                      'assets/pets/${pet.file}.png',
-                      height: 100,
-                      width: 100,
-                    ),
-            ),
-          ),
+          Flexible(flex: 2, child: PetIcon(pet: pet)),
           SizedBox(width: 10),
           Flexible(
             flex: 5,
@@ -105,7 +89,7 @@ class SavedPetCard extends ViewModelWidget<SavedPetsViewModel> {
                   ),
                 ),
                 SizedBox(height: 5),
-                Text('Hunger: ${hungerPercentage}%'),
+                Text('Status: ${pet.status()}'),
                 SizedBox(height: 5),
                 LinearPercentIndicator(
                   percent: hunger.clamp(0.0, 1.0),
@@ -120,17 +104,11 @@ class SavedPetCard extends ViewModelWidget<SavedPetsViewModel> {
                   children: [
                     FeedButton(
                       onPressed: () => viewModel.feedPet(pet),
-                      canFeed: viewModel.canFeed && pet.hunger! < 1.0,
+                      canFeed: viewModel.canFeed && pet.hunger! < 1.0 && pet.hunger! != 0.0,
                     ),
-                    TextButton(
-                      onPressed: () => viewModel.deletePet(pet),
-                      child: Text(
-                        'Sell',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.red,
-                        ),
-                      ),
+                    SellButton(
+                      onPressed: () => viewModel.deletePet(pet, pet.sellValue()),
+                      sellValue: pet.sellValue(),
                     ),
                   ],
                 ),
@@ -176,6 +154,81 @@ class FeedButton extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class SellButton extends StatelessWidget {
+  const SellButton({super.key, required this.onPressed, required this.sellValue});
+
+  final Function()? onPressed;
+  final int sellValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        onPressed?.call();
+      },
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'Sell',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.red,
+            ),
+          ),
+          SizedBox(width: 5),
+          FaIcon(FontAwesomeIcons.coins, size: 16, color: Colors.red),
+          SizedBox(width: 5),
+          Text(
+            '$sellValue',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.red,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PetIcon extends StatelessWidget {
+  const PetIcon({super.key, required this.pet});
+
+  final Pet pet;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          color: rarityColor(pet.rarity).withOpacity(0.5),
+          child: pet.isGif
+              ? GifView.asset(
+                  "assets/pets/gifs/${pet.file}.gif",
+                  height: 100,
+                  width: 100,
+                )
+              : Image.asset(
+                  'assets/pets/${pet.file}.png',
+                  height: 100,
+                  width: 100,
+                ),
+        ),
+        Visibility(
+          visible: pet.hunger! <= 0.0,
+          child: FaIcon(
+            FontAwesomeIcons.skullCrossbones,
+            size: 70,
+            color: Colors.red,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -60,7 +60,10 @@ class ScanViewModel extends ReactiveViewModel {
     player.setAsset('assets/audio/fortune.mp3');
     player.play();
 
-    chosenOne = randomChoice(allPets.map((e) => e.name), allPets.map((e) => e.weight));
+    List<Pet> randomPets = getRandomPets();
+
+    chosenOne = randomChoice(randomPets.map((e) => e.name), randomPets.map((e) => e.weight));
+
     int? index = allPets.indexWhere((element) => element.name == chosenOne);
     if (index != -1) {
       controller.add(index);
@@ -68,5 +71,9 @@ class ScanViewModel extends ReactiveViewModel {
     await _userPetsService.savePet(Pet.clone(allPets[index]));
     await _userService.removeCredits(spinCost);
     rebuildUi();
+  }
+
+  List<Pet> getRandomPets() {
+    return (allPets.toList()..shuffle()).take(10).toList();
   }
 }

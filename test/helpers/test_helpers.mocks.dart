@@ -8,19 +8,19 @@ import 'dart:ui' as _i9;
 
 import 'package:dio/dio.dart' as _i2;
 import 'package:flutter/material.dart' as _i7;
-import 'package:flutter_app_template/models/pet.dart' as _i14;
-import 'package:flutter_app_template/models/pets.dart' as _i4;
+import 'package:flutter_app_template/models/pet.dart' as _i16;
+import 'package:flutter_app_template/models/pets.dart' as _i3;
 import 'package:flutter_app_template/services/authentication_service.dart'
     as _i10;
 import 'package:flutter_app_template/services/dio_service.dart' as _i11;
-import 'package:flutter_app_template/services/health_service.dart' as _i15;
+import 'package:flutter_app_template/services/health_service.dart' as _i14;
 import 'package:flutter_app_template/services/hive_service.dart' as _i12;
-import 'package:flutter_app_template/services/user_pets_service.dart' as _i16;
+import 'package:flutter_app_template/services/user_pets_service.dart' as _i15;
 import 'package:flutter_app_template/services/user_service.dart' as _i13;
-import 'package:health/health.dart' as _i5;
+import 'package:health/health.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i6;
-import 'package:uuid/uuid.dart' as _i3;
+import 'package:uuid/uuid.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -43,8 +43,8 @@ class _FakeResponse_0<T> extends _i1.SmartFake implements _i2.Response<T> {
         );
 }
 
-class _FakeUuid_1 extends _i1.SmartFake implements _i3.Uuid {
-  _FakeUuid_1(
+class _FakePets_1 extends _i1.SmartFake implements _i3.Pets {
+  _FakePets_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -53,8 +53,8 @@ class _FakeUuid_1 extends _i1.SmartFake implements _i3.Uuid {
         );
 }
 
-class _FakePets_2 extends _i1.SmartFake implements _i4.Pets {
-  _FakePets_2(
+class _FakeHealthFactory_2 extends _i1.SmartFake implements _i4.HealthFactory {
+  _FakeHealthFactory_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -63,8 +63,8 @@ class _FakePets_2 extends _i1.SmartFake implements _i4.Pets {
         );
 }
 
-class _FakeHealthFactory_3 extends _i1.SmartFake implements _i5.HealthFactory {
-  _FakeHealthFactory_3(
+class _FakeUuid_3 extends _i1.SmartFake implements _i5.Uuid {
+  _FakeUuid_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -881,51 +881,19 @@ class MockHiveService extends _i1.Mock implements _i12.HiveService {
 /// See the documentation for Mockito's code generation for more information.
 class MockUserService extends _i1.Mock implements _i13.UserService {
   @override
-  _i3.Uuid get uuid => (super.noSuchMethod(
-        Invocation.getter(#uuid),
-        returnValue: _FakeUuid_1(
-          this,
-          Invocation.getter(#uuid),
-        ),
-        returnValueForMissingStub: _FakeUuid_1(
-          this,
-          Invocation.getter(#uuid),
-        ),
-      ) as _i3.Uuid);
-  @override
-  _i4.Pets get pets => (super.noSuchMethod(
-        Invocation.getter(#pets),
-        returnValue: _FakePets_2(
-          this,
-          Invocation.getter(#pets),
-        ),
-        returnValueForMissingStub: _FakePets_2(
-          this,
-          Invocation.getter(#pets),
-        ),
-      ) as _i4.Pets);
-  @override
-  set pets(_i4.Pets? _pets) => super.noSuchMethod(
-        Invocation.setter(
-          #pets,
-          _pets,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  _i4.Pets get allPets => (super.noSuchMethod(
+  _i3.Pets get allPets => (super.noSuchMethod(
         Invocation.getter(#allPets),
-        returnValue: _FakePets_2(
+        returnValue: _FakePets_1(
           this,
           Invocation.getter(#allPets),
         ),
-        returnValueForMissingStub: _FakePets_2(
+        returnValueForMissingStub: _FakePets_1(
           this,
           Invocation.getter(#allPets),
         ),
-      ) as _i4.Pets);
+      ) as _i3.Pets);
   @override
-  set allPets(_i4.Pets? _allPets) => super.noSuchMethod(
+  set allPets(_i3.Pets? _allPets) => super.noSuchMethod(
         Invocation.setter(
           #allPets,
           _allPets,
@@ -953,21 +921,23 @@ class MockUserService extends _i1.Mock implements _i13.UserService {
         returnValueForMissingStub: 0,
       ) as int);
   @override
-  void addCredits(int? num) => super.noSuchMethod(
+  _i8.Future<void> addCredits(int? num) => (super.noSuchMethod(
         Invocation.method(
           #addCredits,
           [num],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
   @override
-  void removeCredits(int? num) => super.noSuchMethod(
+  _i8.Future<void> removeCredits(int? num) => (super.noSuchMethod(
         Invocation.method(
           #removeCredits,
           [num],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
   @override
   _i8.Future<void> calculateInitialSteps(int? lifeTimeSteps) =>
       (super.noSuchMethod(
@@ -998,43 +968,18 @@ class MockUserService extends _i1.Mock implements _i13.UserService {
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
   @override
-  double randomRange(
-    num? start,
-    num? end,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #randomRange,
-          [
-            start,
-            end,
-          ],
-        ),
-        returnValue: 0.0,
-        returnValueForMissingStub: 0.0,
-      ) as double);
-  @override
-  _i8.Future<void> savePet(_i14.Pet? pet) => (super.noSuchMethod(
-        Invocation.method(
-          #savePet,
-          [pet],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
-  @override
-  _i8.Future<void> deletePet(_i14.Pet? pet) => (super.noSuchMethod(
-        Invocation.method(
-          #deletePet,
-          [pet],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
-  @override
   bool canSpinWheel() => (super.noSuchMethod(
         Invocation.method(
           #canSpinWheel,
+          [],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  bool canFeed() => (super.noSuchMethod(
+        Invocation.method(
+          #canFeed,
           [],
         ),
         returnValue: false,
@@ -1078,21 +1023,21 @@ class MockUserService extends _i1.Mock implements _i13.UserService {
 /// A class which mocks [HealthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHealthService extends _i1.Mock implements _i15.HealthService {
+class MockHealthService extends _i1.Mock implements _i14.HealthService {
   @override
-  _i5.HealthFactory get health => (super.noSuchMethod(
+  _i4.HealthFactory get health => (super.noSuchMethod(
         Invocation.getter(#health),
-        returnValue: _FakeHealthFactory_3(
+        returnValue: _FakeHealthFactory_2(
           this,
           Invocation.getter(#health),
         ),
-        returnValueForMissingStub: _FakeHealthFactory_3(
+        returnValueForMissingStub: _FakeHealthFactory_2(
           this,
           Invocation.getter(#health),
         ),
-      ) as _i5.HealthFactory);
+      ) as _i4.HealthFactory);
   @override
-  set health(_i5.HealthFactory? _health) => super.noSuchMethod(
+  set health(_i4.HealthFactory? _health) => super.noSuchMethod(
         Invocation.setter(
           #health,
           _health,
@@ -1136,9 +1081,167 @@ class MockHealthService extends _i1.Mock implements _i15.HealthService {
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+  @override
+  _i8.Future<void> fetchStepData() => (super.noSuchMethod(
+        Invocation.method(
+          #fetchStepData,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }
 
 /// A class which mocks [UserPetsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserPetsService extends _i1.Mock implements _i16.UserPetsService {}
+class MockUserPetsService extends _i1.Mock implements _i15.UserPetsService {
+  @override
+  _i5.Uuid get uuid => (super.noSuchMethod(
+        Invocation.getter(#uuid),
+        returnValue: _FakeUuid_3(
+          this,
+          Invocation.getter(#uuid),
+        ),
+        returnValueForMissingStub: _FakeUuid_3(
+          this,
+          Invocation.getter(#uuid),
+        ),
+      ) as _i5.Uuid);
+  @override
+  _i3.Pets get pets => (super.noSuchMethod(
+        Invocation.getter(#pets),
+        returnValue: _FakePets_1(
+          this,
+          Invocation.getter(#pets),
+        ),
+        returnValueForMissingStub: _FakePets_1(
+          this,
+          Invocation.getter(#pets),
+        ),
+      ) as _i3.Pets);
+  @override
+  set pets(_i3.Pets? _pets) => super.noSuchMethod(
+        Invocation.setter(
+          #pets,
+          _pets,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  int get listenersCount => (super.noSuchMethod(
+        Invocation.getter(#listenersCount),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+  @override
+  _i8.Future<void> loadPets() => (super.noSuchMethod(
+        Invocation.method(
+          #loadPets,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+  @override
+  double randomRange(
+    num? start,
+    num? end,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #randomRange,
+          [
+            start,
+            end,
+          ],
+        ),
+        returnValue: 0.0,
+        returnValueForMissingStub: 0.0,
+      ) as double);
+  @override
+  _i8.Future<void> savePet(_i16.Pet? pet) => (super.noSuchMethod(
+        Invocation.method(
+          #savePet,
+          [pet],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+  @override
+  _i8.Future<void> deletePet(String? petId) => (super.noSuchMethod(
+        Invocation.method(
+          #deletePet,
+          [petId],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+  @override
+  _i8.Future<void> feedPet(String? petId) => (super.noSuchMethod(
+        Invocation.method(
+          #feedPet,
+          [petId],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+  @override
+  _i8.Future<void> checkPetHealth() => (super.noSuchMethod(
+        Invocation.method(
+          #checkPetHealth,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+  @override
+  _i8.Future<void> updatePetHunger(
+    String? petId,
+    double? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updatePetHunger,
+          [
+            petId,
+            value,
+          ],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+  @override
+  void listenToReactiveValues(List<dynamic>? reactiveValues) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #listenToReactiveValues,
+          [reactiveValues],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void addListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void removeListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
