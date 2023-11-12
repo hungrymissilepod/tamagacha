@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/models/pet.dart';
+import 'package:flutter_app_template/services/hive_service.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gif_view/gif_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_app_template/services/user_service.dart';
@@ -19,7 +21,7 @@ class SavedPetsView extends StackedView<SavedPetsViewModel> {
   ) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Pets'),
+        title: Text('My Pets ${viewModel.userPets.length}/$maxPets'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -60,37 +62,51 @@ class SavedPetCard extends ViewModelWidget<SavedPetsViewModel> {
     double hunger = pet.hunger?.toPrecision(2) ?? 0.0;
     int hungerPercentage = (hunger * 100).toInt();
     return Card(
+      color: Colors.grey[300],
+      margin: EdgeInsets.symmetric(vertical: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          pet.isGif
-              ? Flexible(
-                  flex: 2,
-                  child: GifView.asset(
-                    "assets/pets/gifs/${pet.file}.gif",
-                    height: 100,
-                    width: 100,
-                  ),
-                )
-              : Flexible(
-                  flex: 2,
-                  child: Image.asset(
-                    'assets/pets/${pet.file}.png',
-                    height: 100,
-                    width: 100,
-                  )),
+          SizedBox(width: 10),
+          Flexible(
+            flex: 2,
+            child: Container(
+              color: rarityColor(pet.rarity).withOpacity(0.5),
+              child: pet.isGif
+                  ? GifView.asset(
+                      "assets/pets/gifs/${pet.file}.gif",
+                      height: 100,
+                      width: 100,
+                    )
+                  : Image.asset(
+                      'assets/pets/${pet.file}.png',
+                      height: 100,
+                      width: 100,
+                    ),
+            ),
+          ),
+          SizedBox(width: 10),
           Flexible(
             flex: 5,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 5),
                 Text(
                   pet.name,
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
+                SizedBox(height: 5),
                 Text(
-                  'Rarity: ${pet.rarity}',
+                  '${pet.rarity.capitalize()}',
+                  style: TextStyle(
+                    color: rarityColor(pet.rarity),
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
+                SizedBox(height: 5),
                 Text('Hunger: ${hungerPercentage}%'),
+                SizedBox(height: 5),
                 LinearPercentIndicator(
                   percent: hunger.clamp(0.0, 1.0),
                   progressColor: hungerBarColor(hunger),
@@ -100,21 +116,16 @@ class SavedPetCard extends ViewModelWidget<SavedPetsViewModel> {
                   padding: EdgeInsets.zero,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextButton(
+                    FeedButton(
                       onPressed: () => viewModel.feedPet(pet),
-                      child: Text(
-                        'Feed',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                        ),
-                      ),
+                      canFeed: viewModel.canFeed && pet.hunger! < 1.0,
                     ),
                     TextButton(
                       onPressed: () => viewModel.deletePet(pet),
                       child: Text(
-                        'Put down',
+                        'Sell',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.red,
@@ -126,6 +137,43 @@ class SavedPetCard extends ViewModelWidget<SavedPetsViewModel> {
               ],
             ),
           ),
+          SizedBox(width: 10),
+        ],
+      ),
+    );
+  }
+}
+
+class FeedButton extends StatelessWidget {
+  const FeedButton({super.key, required this.onPressed, required this.canFeed});
+
+  final Function()? onPressed;
+  final bool canFeed;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        if (canFeed) {
+          onPressed?.call();
+        }
+      },
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'Feed',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: canFeed ? Colors.blue : Colors.grey,
+            ),
+          ),
+          SizedBox(width: 5),
+          FaIcon(
+            FontAwesomeIcons.burger,
+            size: 16,
+            color: canFeed ? Colors.blue : Colors.grey,
+          )
         ],
       ),
     );

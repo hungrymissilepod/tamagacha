@@ -56,7 +56,7 @@ class ScanViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  spinWheel() {
+  spinWheel() async {
     player.setAsset('assets/audio/fortune.mp3');
     player.play();
 
@@ -65,8 +65,8 @@ class ScanViewModel extends ReactiveViewModel {
     if (index != -1) {
       controller.add(index);
     }
-    _userPetsService.savePet(Pet.clone(allPets[index]));
-    _userService.removeCredits(spinCost);
+    await _userPetsService.savePet(Pet.clone(allPets[index]));
+    await _userService.removeCredits(spinCost);
     rebuildUi();
   }
 }

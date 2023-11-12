@@ -37,17 +37,7 @@ class Pet extends Equatable {
   Map<String, dynamic> toJson() => _$PetToJson(this);
 
   @override
-  List<Object?> get props => [
-        name,
-        weight,
-        file,
-        isGif,
-        rarity,
-        uuid,
-        hungerThreshold,
-        hungerDecrement,
-        hunger
-      ];
+  List<Object?> get props => [name, weight, file, isGif, rarity, uuid, hungerThreshold, hungerDecrement, hunger];
 
   factory Pet.clone(Pet original) {
     Map<String, dynamic> map = original.toJson();
@@ -72,7 +62,7 @@ Color rarityColor(String rarity) {
     case PetRarity.unique:
       return Colors.red;
     case PetRarity.legendary:
-      return Colors.yellow;
+      return Colors.orange;
     default:
       return Colors.white;
   }

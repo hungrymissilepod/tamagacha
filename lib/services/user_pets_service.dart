@@ -58,7 +58,7 @@ class UserPetsService with ListenableServiceMixin {
     DateTime lastCheckDateTime = DateTime.fromMillisecondsSinceEpoch(lastCheckMilliseconds);
 
     DateTime now = DateTime.now();
-    // now = now.subtract(Duration(minutes: 61));
+    // now = now.subtract(Duration(minutes: 900));
 
     int diffMinutes = now.difference(lastCheckDateTime).inMinutes;
 
@@ -87,4 +87,10 @@ class UserPetsService with ListenableServiceMixin {
 
 extension DoubleRounding on double {
   double toPrecision(int n) => double.parse(toStringAsFixed(n));
+}
+
+extension StringExtension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
+  }
 }

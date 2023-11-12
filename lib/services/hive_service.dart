@@ -8,6 +8,7 @@ import 'package:path/path.dart' show join;
 const int spinCost = 1000;
 const int maxPets = 10;
 const double foodAmount = 0.2; // amount food replenishes hunger
+const int foodCost = 125;
 const int healthCheckIntervalMinutes = 60;
 
 /// how many minutes between health checks

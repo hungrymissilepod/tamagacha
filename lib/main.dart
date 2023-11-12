@@ -15,7 +15,6 @@ import 'package:permission_handler/permission_handler.dart';
 /*
 TODO:
 
-- display pet rarity in saved pets view cards
 - if a pet's hunger reaches 0 they die. Show a dialog to user telling them that their pet died and remove their pet
 - Show dialog when user gets a new pet. Allow user to name pet and save it's given name
 - pets can gain EXP and level up?

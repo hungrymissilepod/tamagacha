@@ -46,8 +46,7 @@ class HomeView extends StackedView<HomeViewModel> {
       ),
       body: SafeArea(
         child: PageView(
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
+          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           controller: viewModel.pageController,
           onPageChanged: viewModel.onPageChanged,
           children: <Widget>[
@@ -73,23 +72,60 @@ class PetItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: rarityColor(pet.rarity).withOpacity(0.5),
-      margin: EdgeInsets.all(20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          pet.isGif
-              ? Flexible(
-                  child: GifView.asset(
-                    "assets/pets/gifs/${pet.file}.gif",
-                    frameRate: 60,
-                  ),
-                )
-              : Flexible(child: Image.asset('assets/pets/${pet.file}.png')),
-          Text(pet.name),
-        ],
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.symmetric(
+          horizontal: BorderSide(
+            color: rarityColor(pet.rarity).withOpacity(0.5),
+            width: 3,
+          ),
+          vertical: BorderSide(
+            color: rarityColor(pet.rarity).withOpacity(0.5),
+            width: 3,
+          ),
+        ),
+        color: rarityColor(pet.rarity).withOpacity(0.5),
+      ),
+      child: Container(
+        margin: const EdgeInsets.all(14),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            pet.isGif
+                ? Flexible(
+                    child: GifView.asset(
+                      "assets/pets/gifs/${pet.file}.gif",
+                      frameRate: 60,
+                    ),
+                  )
+                : Flexible(child: Image.asset('assets/pets/${pet.file}.png')),
+            const SizedBox(height: 10),
+            Text(
+              pet.name,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+
+      // child: DecoratedBox(
+      //   decoration: BoxDecoration(
+      //     border: Border.symmetric(
+      //       horizontal: BorderSide(
+      //         color: style.borderColor,
+      //         width: style.borderWidth / 2,
+      //       ),
+      //       vertical: BorderSide(
+      //         color: style.borderColor,
+      //         width: style.borderWidth / 4,
+      //       ),
+      //     ),
+      //     color: style.color,
+      //   ),
+      //   child: Center(
+      //     child: DefaultTextStyle(
+      //       textAlign: style.textAlign,
+      //       style: style.textStyle,
