@@ -10,7 +10,7 @@
         </intent>
   </queries>
     <application
-        android:label="flutter_app_template"
+        android:label="Tamagacha"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">      
         <activity
