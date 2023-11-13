@@ -29,6 +29,7 @@ class ScanViewModel extends ReactiveViewModel {
   int get lifeTimeSteps => _healthService.lifeTimeSteps;
 
   bool get canSpinWheel => _userService.canSpinWheel();
+  bool get canScanQRCode => _userService.canScanQRCode();
 
   Future<void> addCreditsCheat() async {
     await _userService.addCredits(spinCost);

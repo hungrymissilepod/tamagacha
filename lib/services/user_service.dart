@@ -80,6 +80,11 @@ class UserService with ListenableServiceMixin {
     return true;
   }
 
+  bool canScanQRCode() {
+    if (_userPetsService.pets.pets.length >= maxPets) return false;
+    return true;
+  }
+
   bool canFeed() {
     if (credits < foodCost) return false;
     return true;

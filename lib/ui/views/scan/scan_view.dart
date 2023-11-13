@@ -115,7 +115,7 @@ class ScanView extends StackedView<ScanViewModel> {
                 MaterialButton(
                   disabledColor: Colors.grey,
                   color: Colors.black,
-                  onPressed: viewModel.canSpinWheel
+                  onPressed: viewModel.canScanQRCode
                       ? () {
                           viewModel.scanQR();
                         }
