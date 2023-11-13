@@ -2,11 +2,10 @@
   "pets": [
     {
       "name": "Swole Doge",
-      "weight": 0.3,
+      "weight": 0.5,
       "file": "doge_swole",
       "isGif": false,
       "rarity": "uncommon",
-      "hunger_threshold": 0.2,
       "hunger_decrement": 0.1
     },
     {
@@ -15,16 +14,14 @@
       "file": "doge",
       "isGif": false,
       "rarity": "common",
-      "hunger_threshold": 0.3,
       "hunger_decrement": 0.1
     },
     {
       "name": "Jerry",
-      "weight": 0.4,
+      "weight": 0.5,
       "file": "jerry",
       "isGif": false,
       "rarity": "uncommon",
-      "hunger_threshold": 0.3,
       "hunger_decrement": 0.2
     },
     {
@@ -33,7 +30,6 @@
       "file": "mike",
       "isGif": false,
       "rarity": "rare",
-      "hunger_threshold": 0.2,
       "hunger_decrement": 0.1
     },
     {
@@ -42,7 +38,6 @@
       "file": "pika",
       "isGif": false,
       "rarity": "infrequent",
-      "hunger_threshold": 0.4,
       "hunger_decrement": 0.15
     },
     {
@@ -51,7 +46,6 @@
       "file": "yoshi",
       "isGif": false,
       "rarity": "rare",
-      "hunger_threshold": 0.4,
       "hunger_decrement": 0.2
     },
     {
@@ -60,7 +54,6 @@
       "file": "john_cena",
       "isGif": true,
       "rarity": "unique",
-      "hunger_threshold": 0.5,
       "hunger_decrement": 0.2
     },
     {
@@ -69,7 +62,6 @@
       "file": "dog",
       "isGif": true,
       "rarity": "rare",
-      "hunger_threshold": 0.3,
       "hunger_decrement": 0.15
     },
     {
@@ -78,7 +70,6 @@
       "file": "ricardo",
       "isGif": true,
       "rarity": "legendary",
-      "hunger_threshold": 0.6,
       "hunger_decrement": 0.2
     },
     {
@@ -87,8 +78,103 @@
       "file": "dat_boi",
       "isGif": true,
       "rarity": "legendary",
-      "hunger_threshold": 0.5,
       "hunger_decrement": 0.17
+    },
+    {
+      "name": "Kirby",
+      "weight": 0.5,
+      "file": "kirby",
+      "isGif": true,
+      "rarity": "infrequent",
+      "hunger_decrement": 0.2
+    },
+    {
+      "name": "Vanessa",
+      "weight": 0.05,
+      "file": "vanessa",
+      "isGif": false,
+      "rarity": "legendary",
+      "hunger_decrement": 0.4
+    },
+    {
+      "name": "PS2 Hagrid",
+      "weight": 0.15,
+      "file": "hagrid",
+      "isGif": false,
+      "rarity": "unique",
+      "hunger_decrement": 0.3
+    },
+    {
+      "name": "Vibing Cat",
+      "weight": 0.1,
+      "file": "cat_vibing",
+      "isGif": true,
+      "rarity": "legendary",
+      "hunger_decrement": 0.12
+    },
+    {
+      "name": "Trump",
+      "weight": 0.22,
+      "file": "trump",
+      "isGif": true,
+      "rarity": "unique",
+      "hunger_decrement": 0.27
+    },
+    {
+      "name": "Patrick",
+      "weight": 0.2,
+      "file": "patrick",
+      "isGif": true,
+      "rarity": "rare",
+      "hunger_decrement": 0.1
+    },
+    {
+      "name": "Roll Safe",
+      "weight": 0.3,
+      "file": "roll_safe",
+      "isGif": true,
+      "rarity": "infrequent",
+      "hunger_decrement": 0.2
+    },
+    {
+      "name": "Travolta",
+      "weight": 0.32,
+      "file": "travolta",
+      "isGif": true,
+      "rarity": "uncommon",
+      "hunger_decrement": 0.1
+    },
+    {
+      "name": "Crying Cat",
+      "weight": 0.4,
+      "file": "crying_cat",
+      "isGif": false,
+      "rarity": "common",
+      "hunger_decrement": 0.2
+    },
+    {
+      "name": "Shrek",
+      "weight": 0.39,
+      "file": "shrek",
+      "isGif": false,
+      "rarity": "uncommon",
+      "hunger_decrement": 0.3
+    },
+    {
+      "name": "Big Chungus",
+      "weight": 0.4,
+      "file": "chungus",
+      "isGif": false,
+      "rarity": "common",
+      "hunger_decrement": 0.22
+    },
+    {
+      "name": "DJ Khaled",
+      "weight": 0.17,
+      "file": "khaled",
+      "isGif": true,
+      "rarity": "legendary",
+      "hunger_decrement": 0.6
     }
   ]
 }
