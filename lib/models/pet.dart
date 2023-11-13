@@ -51,15 +51,15 @@ class Pet extends Equatable {
       case PetRarity.common:
         return 1;
       case PetRarity.uncommon:
-        return 1.1;
+        return 1.25;
       case PetRarity.infrequent:
-        return 1.3;
-      case PetRarity.rare:
         return 1.5;
+      case PetRarity.rare:
+        return 1.8;
       case PetRarity.unique:
-        return 1.7;
+        return 1.2;
       case PetRarity.legendary:
-        return 2.0;
+        return 2.5;
       default:
         return 1;
     }
@@ -74,9 +74,9 @@ class Pet extends Equatable {
     if (daysKeptPet == 0) {
       daysKeptPet = 1;
     }
-    double daysKeptFactor = daysKeptPet * 1.05;
+    double daysKeptFactor = daysKeptPet * 1.25;
 
-    int basePetValue = 100;
+    int basePetValue = 250;
 
     double value = hunger! * rarityFactor * daysKeptFactor * 100;
     value = value * 0.8;
