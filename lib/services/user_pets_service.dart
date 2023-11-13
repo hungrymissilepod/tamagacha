@@ -64,6 +64,7 @@ class UserPetsService with ListenableServiceMixin {
     int diffMinutes = now.difference(lastCheckDateTime).inMinutes;
 
     int numHealthChecksOverdue = (diffMinutes ~/ healthCheckIntervalMinutes).abs();
+    if (numHealthChecksOverdue == 0) return; // exit early if we do not need to check pet health
     print('numHealthChecksOverdue: $numHealthChecksOverdue');
 
     for (Pet pet in pets.pets) {
